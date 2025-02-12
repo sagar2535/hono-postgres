@@ -28,4 +28,9 @@ app.all("*", (c: Context) => {
   throw new AppError(`Cannot find ${c.req.url} on this server`, 404);
 });
 
-export default app;
+const PORT = process.env.PORT! || 4000;
+
+export default {
+  port: PORT,
+  fetch: app.fetch,
+};
