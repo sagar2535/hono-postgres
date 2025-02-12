@@ -1,16 +1,26 @@
 {
-  "name": "Honojs",
-  "scripts": {
-    "dev": "bun run --hot src/config/app.ts"
-  },
+  "name": "honojs-app",
+  "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "bun --hot run src/config/app.ts",
+    "build": "bun build src/config/app.ts --outdir dist",
+    "start": "bun run dist/app.js"
+  },
   "dependencies": {
-    "hono": "^4.6.20",
+    "hono": "^4.7.0",
     "pg": "^8.13.2",
+    "pg-hstore": "^2.3.4",
     "pg-pool": "^3.7.1",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "wkx": "^0.5.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.11",
+    "@types/sequelize": "^4.28.20"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
   }
 }

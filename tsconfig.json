@@ -2,6 +2,15 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
-  }
+    "jsxImportSource": "hono/jsx",
+    "types": ["bun"],
+    "lib": ["ESNext"],
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"]
 }
