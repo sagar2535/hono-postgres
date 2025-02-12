@@ -1,32 +1,18 @@
 # Use official Bun image
-FROM oven/bun:latest AS builder
+FROM oven/bun:latest
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package files first for caching
+# Copy package files and install dependencies
 COPY package.json bun.lockb ./
-
-# Install dependencies
 RUN bun install --frozen-lockfile
 
 # Copy the rest of the application files
 COPY . .
 
-# Use a lightweight final image for production
-FROM oven/bun:latest AS runner
+# Expose the dynamic Render port
+EXPOSE 4000
 
-# Set the working directory
-WORKDIR /app
-
-# Copy only necessary files from builder stage
-COPY --from=builder /app /app
-
-# Copy the .env file
-COPY .env .env
-
-# Expose the application's port (update as needed)
-EXPOSE 3000
-
-# Run the application in production mode
-CMD ["bun", "run", "src/config/app.ts"]
+# Start the server
+CMD ["bun", "run", "src/config/server.ts"]
