@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 4000
 
 # Start the server
-CMD ["bun", "run", "src/config/server.ts"]
+CMD ["bun", "run", "src/config/app.ts"]
