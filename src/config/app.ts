@@ -29,6 +29,6 @@ app.all("*", (c: Context) => {
 });
 
 export default {
-  port: 4000,
+  port: process.env.PORT || 4000,
   fetch: app.fetch,
 };
