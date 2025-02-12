@@ -22,6 +22,9 @@ WORKDIR /app
 # Copy only necessary files from builder stage
 COPY --from=builder /app /app
 
+# Copy the .env file
+COPY .env .env
+
 # Expose the application's port (update as needed)
 EXPOSE 3000
 
