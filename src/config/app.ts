@@ -28,7 +28,14 @@ app.all("*", (c: Context) => {
   throw new AppError(`Cannot find ${c.req.url} on this server`, 404);
 });
 
-const PORT = process.env.PORT! || 4000;
+app.onError((err, c) => {
+  return c.json({
+    status: err.statusCode,
+    message: err.message || "Internal Server Error",
+  });
+});
+
+const PORT = process.env.PORT ?? 4000;
 
 export default {
   port: PORT,

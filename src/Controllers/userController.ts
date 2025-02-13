@@ -3,17 +3,15 @@ import User from "@/Models/userModel";
 import AppError from "@/utils/AppError";
 
 export async function getAllUsers(c: Context) {
-  try {
-    const { count, rows } = await User.findAndCountAll();
-
-    return c.json({
-      totalCount: count,
-      message: "success",
-      users: rows,
-    });
-  } catch (error) {
-    console.error(error);
+  const { count, rows } = await User.findAndCountAll();
+  if (rows.length == 0) {
+    throw new AppError("No data found!", 404);
   }
+  return c.json({
+    totalCount: count,
+    message: "success",
+    users: rows,
+  });
 }
 
 export async function userRegister(c: Context) {
