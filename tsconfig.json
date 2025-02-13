@@ -11,7 +11,16 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@Controllers/*": ["src/Controllers/*"],
+      "@Models/*": ["src/Models/*"],
+      "@Routes/*": ["src/Routes/*"],
+      "@config/*": ["src/config/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
   "include": ["src"]
 }

@@ -2,8 +2,8 @@ import { Context, Hono } from "hono";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
 
-import userRoutes from "../Routes/userRoutes";
-import AppError from "../utils/AppError";
+import userRoutes from "@/Routes/userRoutes";
+import AppError from "@/utils/AppError";
 
 const app = new Hono();
 

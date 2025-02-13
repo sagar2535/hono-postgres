@@ -1,6 +1,6 @@
 import { Context } from "hono";
-import User from "../Models/userModel";
-import AppError from "../utils/AppError";
+import User from "@/Models/userModel";
+import AppError from "@/utils/AppError";
 
 export async function getAllUsers(c: Context) {
   try {
