@@ -1,8 +1,31 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "@/config/database";
 
-const User = sequelize.define(
-  "User",
+interface UserAttributes {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface UserCreationAttributes
+  extends Optional<UserAttributes, "id" | "created_at" | "updated_at"> {}
+
+class User
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
+  public id!: number;
+  public name!: string;
+  public email!: string;
+  public password!: string;
+  public created_at!: Date;
+  public updated_at!: Date;
+}
+
+User.init(
   {
     id: {
       type: DataTypes.BIGINT,
@@ -32,8 +55,9 @@ const User = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    sequelize,
     tableName: "user",
+    timestamps: false,
   }
 );
 
