@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  # PostgreSQL service
+  db:
+    image: postgres:latest # Use the official PostgreSQL Docker image
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME} # Database name from your .env file
+      POSTGRES_USER: ${DB_USER} # User from your .env file
+      POSTGRES_PASSWORD: ${DB_PASSWORD} # Password from your .env file
+    ports:
+      - "5432:5432" # Expose PostgreSQL port to the host (for local testing)
+    volumes:
+      - pg_data:/var/lib/postgresql/data # Persist data across container restarts
+    networks:
+      - backend
+
+  # Hono.js backend service
+  app:
+    build:
+      context: . # Use the Dockerfile in the current directory
+    container_name: hono_app
+    environment:
+      PORT: ${PORT} # Port from .env
+      JWT_SECRET: ${JWT_SECRET} # JWT secret from .env
+      DB_HOST: db # Hostname of the PostgreSQL service (uses the service name as host)
+      DB_PORT: 5432 # Default PostgreSQL port
+      DB_NAME: ${DB_NAME} # Database name from .env
+      DB_USER: ${DB_USER} # Database user from .env
+      DB_PASSWORD: ${DB_PASSWORD} # Database password from .env
+    ports:
+      - "8000:8000" # Expose the backend on port 8000
+    depends_on:
+      - db # Ensure that the db service starts before the app
+    networks:
+      - backend
+
+volumes:
+  pg_data: # This volume persists PostgreSQL data
+
+networks:
+  backend: # Use a custom network for both services to communicate
+    driver: bridge # The default network driver

@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import * as userController from "@/Controllers/userController";
 
-const userRoutes = new Hono();
-userRoutes.post("/register", userController.userRegister);
-userRoutes.post("/login", userController.userLogin);
+const router = new Hono();
+router.post("/register", userController.userRegister);
+router.post("/login", userController.userLogin);
 
-userRoutes.use(userController.authMiddleware);
-userRoutes.get("/getUsers", userController.getAllUsers);
+router.use(userController.authMiddleware);
+router.get("/getUsers", userController.getAllUsers);
 
-export default userRoutes;
+export default router;
